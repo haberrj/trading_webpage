@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #efefef;
+    margin: 0;
+}
+
+.hero-bg {
+    color: #efefef;
+    padding: 4em;
+}
+
+.top-info {
+    width: 500px;
+    height: 250px;
+    text-align: justify;
+}
+
+.top-info h1 {
+    font-family: 'Righteous', cursive;
+    font-size: 48px;
+}
+
+.top-info h1 a {
+    color: #efefef;
+    text-decoration: none;
+}
+
+.top-info img {
+    width: 30%;
+    height: auto;
+}
+
+
+.cryptos {
+    text-align: left;
+}
+
+.btc_title {
+    width: 150px;
+    height: 75px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.btc_title img {
+    width: 85%;
+    height: auto;
+}
+
+.eth_title {
+    width: 150px;
+    height: 75px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.eth_title img {
+    width: 85%;
+    height: auto;
+}
+
+.ltc_title {
+    width: 150px;
+    height: 75px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.ltc_title img {
+    width: 85%;
+    height: auto;
+}
+
+.bnb_title {
+    width: 150px;
+    height: 75px;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.bnb_title img {
+    width: 85%;
+    height: auto;
+}

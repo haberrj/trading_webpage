@@ -25,24 +25,12 @@
                     <img src="images/bitcoin.png" alt="Bitcoin logo">
                 </div>
                 <div class="btc_info">
-                    <p class="cash">Allocated Cash Amount:  
-                        <script>
-                            window.onload=function(){with (new XMLHttpRequest()){
-                                onreadystatechange=cb;
-                                open('GET', '/home/ronhaber/Documents/Webpage/sample.csv', true);
-                                responseType='text';
-                                send();
-                            }
-                            }
-                            function cb(){if(this.readyState===4)document.getElementById('main')
-                                             .innerHTML=tbl(this.responseText); }
-                            function tbl(csv){ // do whatever is necessary to create your table here ...
-                             return csv.split('\n')
-                                       .map(function(tr,i){return '<tr><td>'
-                                                                 +tr.replace(/\t/g,'</td><td>')
-                                                                 +'</td></tr>';})
-                                       .join('\n'); }
-                        </script>
+                    <p class="cash">Allocated Cash Amount:
+                    <?php
+                        $rows = file('/home/ronhaber/Documents/Webpage/sample.csv');
+                        $last_row = array_pop($rows);
+                        $data = str_getcsv($last_row);
+                    ?>
                         €
                     </p>
                     <p class="balance">Current Balance:

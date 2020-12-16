@@ -8,7 +8,7 @@
         return $connection;
     }
 
-    function getLastValues($connection){
+    function getLastTransactionValues($connection){
         $results = $connection->query('SELECT * FROM transactions');
         while($row=$results->fetchArray(SQLITE3_ASSOC)){
             $time = $row['time'];
@@ -20,8 +20,36 @@
         return $values;
     }
 
+    function getLastPriceValues($connection){
+        $results = $connection->query('SELECT * FROM prices');
+        while($row=$results->fetchArray(SQLITE3_ASSOC)){
+            $time = $row['time'];
+            $price = $row['price'];
+        }
+        $values = array($time, $price);
+        return $values;
+    }
+
+    function getLastCashValues($connection){
+        $results = $connection->query('SELECT * FROM cash');
+        while($row=$results->fetchArray(SQLITE3_ASSOC)){
+            $time = $row['time'];
+            $cash = $row['cash'];
+        }
+        $values = array($time, $cash);
+        return $values;
+    }
+
     function getTime($values){
         return $values[0];
+    }
+
+    function getCash($values){
+        return $values[1];
+    }
+
+    function getPrice($values){
+        return $values[1];
     }
 
     function getHoldingPrice($values){
@@ -48,16 +76,14 @@
         return $values[3];
     }
 
-    function calculateNetworth($values){
-        $balance = (float)getBalance($values);
-        $price = getHoldingPrice($values);
-        if($price == "N/A")
-        {
-            $price = 0.0;
+    function calculateNetworth($balance, $price, $cash){
+        $balance = (float)$balance;
+        $price = (float)$price;
+        if($balance == 0.0){
+            $networth = $cash;
         } else {
-            $price = (float)$price;
+            $networth = $balance * $price;
         }
-        $networth = $balance * $price;
         return $networth;
     }
 

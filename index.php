@@ -25,36 +25,65 @@
                     <img src="Frontend/images/bitcoin.png" alt="Bitcoin logo">
                 </div>
                 <div class="btc_info">
-                    <p class="cash">Allocated Cash Amount:  €</p>
-                    <p class="balance">Current Balance:
+                    <p class="cash">Allocated Cash Amount:  
                     <?php
                         include 'Frontend/php/read_csv.php';
-                        $file = "/home/ronhaber/Documents/Webpage/BTC_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/BTC_Balance.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
+                        $values = getLastCashValues($connection);
+                        echo getCash($values);
+                        closeConnection($connection);
+                    ?>
+                        €
+                    </p>
+                    <p class="balance">Current Balance:
+                    <?php
+                        $file = "/home/ronhaber/Documents/Webpage/BTC_Transactions.db";
+                        $connection = connectToDB($file);
+                        $values = getLastTransactionValues($connection);
                         echo getBalance($values);
                         closeConnection($connection);
                     ?>
                         BTC
                     </p>
-                    <p class="price">Current Price: €</p>
-                    <p class="last_holding">Current Holding Price:
-                    <?php
-                        $file = "/home/ronhaber/Documents/Webpage/BTC_DB.db";
+                    <p class="price">Current Price: 
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/BTC_Realtime.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo getHoldingPrice($values);
+                        $values = getLastPriceValues($connection);
+                        echo getPrice($values);
                         closeConnection($connection);
                     ?>
                         €
                     </p>
+                    <p class="last_holding">Current Holding Price:
+                    <?php
+                        $file = "/home/ronhaber/Documents/Webpage/BTC_Transactions.db";
+                        $connection = connectToDB($file);
+                        $values = getLastTransactionValues($connection);
+                        $last_holding_price = getHoldingPrice($values);
+                        echo $last_holding_price;
+                        if($last_holding_price != "N/A"){
+                            echo " €";
+                        }
+                        closeConnection($connection);
+                    ?>
+                    </p>
                     <p class="networth">Current Networth:
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/BTC_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/BTC_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Webpage/BTC_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Webpage/BTC_Balance.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo calculateNetworth($values);
+                        $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
+                        $connection = connectToDB($file2);
+                        $price_values = getLastPriceValues($connection);
+                        closeConnection($connection);
+                        $connection = connectToDB($file3);
+                        $cash_values = getLastCashValues($connection);
+                        closeConnection($connection);
+                        echo calculateNetworth(getBalance($trans_values), getPrice($price_values), getCash($cash_values));
                     ?>
                         €
                     </p>
@@ -66,35 +95,63 @@
                     <img src="Frontend/images/ethereum.png" alt="Ethereum logo">
                 </div>
                 <div class="eth_info">
-                    <p class="cash">Allocated Cash Amount:  €</p>
+                    <p class="cash">Allocated Cash Amount:  
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/ETH_Balance.db";
+                        $connection = connectToDB($file);
+                        $values = getLastCashValues($connection);
+                        echo getCash($values);
+                        closeConnection($connection);
+                    ?>
+                        €</p>
                     <p class="balance">Current Balance:  
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/ETH_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/ETH_Transactions.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
+                        $values = getLastTransactionValues($connection);
                         echo getBalance($values);
                         closeConnection($connection);
                     ?>
                         ETH
                     </p>
-                    <p class="price">Current Price:  €</p>
-                    <p class="last_holding">Current Holding Price:  
-                    <?php
-                        $file = "/home/ronhaber/Documents/Webpage/ETH_DB.db";
+                    <p class="price">Current Price:  
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/ETH_Realtime.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo getHoldingPrice($values);
+                        $values = getLastPriceValues($connection);
+                        echo getPrice($values);
                         closeConnection($connection);
                     ?>
                         €
                     </p>
+                    <p class="last_holding">Current Holding Price:  
+                    <?php
+                        $file = "/home/ronhaber/Documents/Webpage/ETH_Transactions.db";
+                        $connection = connectToDB($file);
+                        $values = getLastTransactionValues($connection);
+                        $last_holding_price = getHoldingPrice($values);
+                        echo $last_holding_price;
+                        if($last_holding_price != "N/A"){
+                            echo " €";
+                        }
+                        closeConnection($connection);
+                    ?>
+                    </p>
                     <p class="networth">Current Networth:  
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/ETH_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/ETH_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Webpage/ETH_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Webpage/ETH_Balance.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo calculateNetworth($values);
+                        $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
+                        $connection = connectToDB($file2);
+                        $price_values = getLastPriceValues($connection);
+                        closeConnection($connection);
+                        $connection = connectToDB($file3);
+                        $cash_values = getLastCashValues($connection);
+                        closeConnection($connection);
+                        echo calculateNetworth(getBalance($trans_values), getPrice($price_values), getCash($cash_values));
                     ?>
                         €
                     </p>
@@ -106,35 +163,64 @@
                     <img src="Frontend/images/litecoin.png" alt="Litecoin logo">
                 </div>
                 <div class="ltc_info">
-                    <p class="cash">Allocated Cash Amount:  €</p>
+                    <p class="cash">Allocated Cash Amount:  
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/LTC_Balance.db";
+                        $connection = connectToDB($file);
+                        $values = getLastCashValues($connection);
+                        echo getCash($values);
+                        closeConnection($connection);
+                    ?>
+                        €
+                    </p>
                     <p class="balance">Current Balance:  
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/LTC_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/LTC_Transactions.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
+                        $values = getLastTransactionValues($connection);
                         echo getBalance($values);
                         closeConnection($connection);
                     ?>
                         LTC
                     </p>
-                    <p class="price">Current Price:  €</p>
-                    <p class="last_holding">Current Holding Price:  
-                    <?php
-                        $file = "/home/ronhaber/Documents/Webpage/LTC_DB.db";
+                    <p class="price">Current Price:  
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/LTC_Realtime.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo getHoldingPrice($values);
+                        $values = getLastPriceValues($connection);
+                        echo getPrice($values);
                         closeConnection($connection);
                     ?>
                         €
                     </p>
+                    <p class="last_holding">Current Holding Price:  
+                    <?php
+                        $file = "/home/ronhaber/Documents/Webpage/LTC_Transactions.db";
+                        $connection = connectToDB($file);
+                        $values = getLastTransactionValues($connection);
+                        $last_holding_price = getHoldingPrice($values);
+                        echo $last_holding_price;
+                        if($last_holding_price != "N/A"){
+                            echo " €";
+                        }
+                        closeConnection($connection);
+                    ?>
+                    </p>
                     <p class="networth">Current Networth:  
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/LTC_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/LTC_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Webpage/LTC_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Webpage/LTC_Balance.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo calculateNetworth($values);
+                        $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
+                        $connection = connectToDB($file2);
+                        $price_values = getLastPriceValues($connection);
+                        closeConnection($connection);
+                        $connection = connectToDB($file3);
+                        $cash_values = getLastCashValues($connection);
+                        closeConnection($connection);
+                        echo calculateNetworth(getBalance($trans_values), getPrice($price_values), getCash($cash_values));
                     ?>
                         €
                     </p>
@@ -146,35 +232,64 @@
                     <img src="Frontend/images/binance_coin.png" alt="Binancecoin logo">
                 </div>
                 <div class="bnb_info">
-                    <p class="cash">Allocated Cash Amount:  €</p>
+                    <p class="cash">Allocated Cash Amount:  
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/BNB_Balance.db";
+                        $connection = connectToDB($file);
+                        $values = getLastCashValues($connection);
+                        echo getCash($values);
+                        closeConnection($connection);
+                    ?>
+                        €
+                    </p>
                     <p class="balance">Current Balance:  
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/BNB_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/BNB_Transactions.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
+                        $values = getLastTransactionValues($connection);
                         echo getBalance($values);
                         closeConnection($connection);
                     ?>
                         BNB
                     </p>
-                    <p class="price">Current Price:  €</p>
-                    <p class="last_holding">Current Holding Price:  
-                    <?php
-                        $file = "/home/ronhaber/Documents/Webpage/BNB_DB.db";
+                    <p class="price">Current Price:  
+                    <?php    
+                        $file = "/home/ronhaber/Documents/Webpage/BNB_Realtime.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo getHoldingPrice($values);
+                        $values = getLastPriceValues($connection);
+                        echo getPrice($values);
                         closeConnection($connection);
                     ?>
                         €
                     </p>
+                    <p class="last_holding">Current Holding Price:  
+                    <?php
+                        $file = "/home/ronhaber/Documents/Webpage/BNB_Transactions.db";
+                        $connection = connectToDB($file);
+                        $values = getLastTransactionValues($connection);
+                        $last_holding_price = getHoldingPrice($values);
+                        echo $last_holding_price;
+                        if($last_holding_price != "N/A"){
+                            echo " €";
+                        }
+                        closeConnection($connection);
+                    ?>
+                    </p>
                     <p class="networth">Current Networth:  
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/BNB_DB.db";
+                        $file = "/home/ronhaber/Documents/Webpage/BNB_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Webpage/BNB_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Webpage/BNB_Balance.db";
                         $connection = connectToDB($file);
-                        $values = getLastValues($connection);
-                        echo calculateNetworth($values);
+                        $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
+                        $connection = connectToDB($file2);
+                        $price_values = getLastPriceValues($connection);
+                        closeConnection($connection);
+                        $connection = connectToDB($file3);
+                        $cash_values = getLastCashValues($connection);
+                        closeConnection($connection);
+                        echo calculateNetworth(getBalance($trans_values), getPrice($price_values), getCash($cash_values));
                     ?>
                         €
                     </p>

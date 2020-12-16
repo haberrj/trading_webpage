@@ -35,9 +35,7 @@ def PopulateNewTransactionsDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("CREATE TABLE transactions (time, name, id, price, status, coin, type);")
-    print("DB Header created")
     cur.executemany("INSERT INTO transactions (time, name, id, price, status, coin, type) VALUES(?, ?, ?, ?, ?, ?, ?);", csv_data)
-    print("DB populated")
     con.commit()
     con.close()
 
@@ -45,7 +43,6 @@ def AppendTransactionsDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("INSERT INTO transactions (time, name, id, price, status, coin, type) VALUES(?, ?, ?, ?, ?, ?, ?);", csv_data)
-    print("New line added to the database")
     con.commit()
     con.close()
 
@@ -60,22 +57,31 @@ def ReadMostRecentValueFromTransactionsCSV(csv_file):
     relevant_data = csv_data[-1]
     return relevant_data
 
+def CheckIfValueIsAlreadyWrittenTransactions(csv_data, db_file):
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    result = cur.execute("SELECT * FROM transactions").fetchall()[-1]
+    cur.close()
+    if(csv_data[0] == result[0]):
+        print("Value already exists")
+        return True
+    else:
+        print("Adding new data")
+        return False
+
 # For realtime prices
 def PopulateNewPricesDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("CREATE TABLE prices (time, name, price, bid, ask);")
-    print("DB Header created")
     cur.executemany("INSERT INTO prices (time, name, price, bid, ask) VALUES(?, ?, ?, ?, ?);", csv_data)
-    print("DB populated")
     con.commit()
     con.close()
 
 def AppendPricesDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
-    cur.execute("INSERT INTO prices (time, name, price, bid, ask) VALUES(?, ?, ?, ?, ?, ?);", csv_data)
-    print("New line added to the database")
+    cur.execute("INSERT INTO prices (time, name, price, bid, ask) VALUES(?, ?, ?, ?, ?);", csv_data)
     con.commit()
     con.close()
 
@@ -90,14 +96,24 @@ def ReadMostRecentValueFromPricesCSV(csv_file):
     relevant_data = csv_data[-1]
     return relevant_data
 
+def CheckIfValueIsAlreadyWrittenPrices(csv_data, db_file):
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    result = cur.execute("SELECT * FROM prices").fetchall()[-1]
+    cur.close()
+    if(csv_data[0] == result[0]):
+        print("Value already exists")
+        return True
+    else:
+        print("Adding new data")
+        return False
+
 # For cash balances
 def PopulateNewCashDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("CREATE TABLE cash (time, name, cash);")
-    print("DB Header created")
     cur.executemany("INSERT INTO cash (time, name, cash) VALUES(?, ?, ?);", csv_data)
-    print("DB populated")
     con.commit()
     con.close()
 
@@ -105,7 +121,6 @@ def AppendCashDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("INSERT INTO cash (time, name, cash) VALUES(?, ?, ?);", csv_data)
-    print("New line added to the database")
     con.commit()
     con.close()
 
@@ -120,10 +135,10 @@ def ReadMostRecentValueFromCashCSV(csv_file):
     relevant_data = csv_data[-1]
     return relevant_data
 
-def CheckIfValueIsAlreadyWritten(csv_data, db_file):
+def CheckIfValueIsAlreadyWrittenCash(csv_data, db_file):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
-    result = cur.execute("SELECT * FROM transactions").fetchall()[-1]
+    result = cur.execute("SELECT * FROM cash").fetchall()[-1]
     cur.close()
     if(csv_data[0] == result[0]):
         print("Value already exists")
@@ -140,7 +155,7 @@ def TransactionsExecution(db_direc, data_file):
         except FileNotFoundError:
             print("CSV file not found")
             sys.exit()
-        check = CheckIfValueIsAlreadyWritten(csv_data, db_direc)
+        check = CheckIfValueIsAlreadyWrittenTransactions(csv_data, db_direc)
         if(check):
             sys.exit()
         else:
@@ -158,7 +173,7 @@ def PricesExecution(db_direc, data_file):
         except FileNotFoundError:
             print("CSV file not found")
             sys.exit()
-        check = CheckIfValueIsAlreadyWritten(csv_data, db_direc)
+        check = CheckIfValueIsAlreadyWrittenPrices(csv_data, db_direc)
         if(check):
             sys.exit()
         else:
@@ -176,7 +191,7 @@ def CashExecution(db_direc, data_file):
         except FileNotFoundError:
             print("CSV file not found")
             sys.exit()
-        check = CheckIfValueIsAlreadyWritten(csv_data, db_direc)
+        check = CheckIfValueIsAlreadyWrittenCash(csv_data, db_direc)
         if(check):
             sys.exit()
         else:
@@ -189,6 +204,7 @@ def CashExecution(db_direc, data_file):
 
 if __name__ == "__main__":
     db_direc = direc + name
+    print(excel)
     if("Transaction" in name):
         TransactionsExecution(db_direc, excel)
     elif("Balance" in name):

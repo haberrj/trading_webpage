@@ -43,7 +43,7 @@
                         $file = "/home/ronhaber/Documents/Webpage/BTC_DB.db";
                         $connection = connectToDB($file);
                         $values = getLastValues($connection);
-                        echo getPrice($values);
+                        echo getHoldingPrice($values);
                         closeConnection($connection);
                     ?>
                         €
@@ -83,7 +83,7 @@
                         $file = "/home/ronhaber/Documents/Webpage/ETH_DB.db";
                         $connection = connectToDB($file);
                         $values = getLastValues($connection);
-                        echo getPrice($values);
+                        echo getHoldingPrice($values);
                         closeConnection($connection);
                     ?>
                         €
@@ -123,7 +123,7 @@
                         $file = "/home/ronhaber/Documents/Webpage/LTC_DB.db";
                         $connection = connectToDB($file);
                         $values = getLastValues($connection);
-                        echo getPrice($values);
+                        echo getHoldingPrice($values);
                         closeConnection($connection);
                     ?>
                         €
@@ -163,7 +163,7 @@
                         $file = "/home/ronhaber/Documents/Webpage/BNB_DB.db";
                         $connection = connectToDB($file);
                         $values = getLastValues($connection);
-                        echo getPrice($values);
+                        echo getHoldingPrice($values);
                         closeConnection($connection);
                     ?>
                         €

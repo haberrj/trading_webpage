@@ -30,7 +30,8 @@ def CreateNewDB(value):
         print("New DB file created at: ", new_db)
     return new_db
 
-def PopulateNewDB(db_file, csv_data):
+# For transactions
+def PopulateNewTransactionsDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("CREATE TABLE transactions (time, name, id, price, status, coin, type);")
@@ -40,7 +41,7 @@ def PopulateNewDB(db_file, csv_data):
     con.commit()
     con.close()
 
-def AppendDB(db_file, csv_data):
+def AppendTransactionsDB(db_file, csv_data):
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     cur.execute("INSERT INTO transactions (time, name, id, price, status, coin, type) VALUES(?, ?, ?, ?, ?, ?, ?);", csv_data)
@@ -48,14 +49,74 @@ def AppendDB(db_file, csv_data):
     con.commit()
     con.close()
 
-def ReadAllValuesFromCSV(csv_file):
+def ReadAllValuesFromTransactionsCSV(csv_file):
     with open(csv_file, "r") as data_file:
         data = csv.DictReader(data_file)
         to_db = [(i['time'], i['name'], i['id'], i['price'], i['status'], i['coin'], i['type']) for i in data]
     return to_db
 
-def ReadMostRecentValueFromCSV(csv_file):
-    csv_data = ReadAllValuesFromCSV(csv_file)
+def ReadMostRecentValueFromTransactionsCSV(csv_file):
+    csv_data = ReadAllValuesFromTransactionsCSV(csv_file)
+    relevant_data = csv_data[-1]
+    return relevant_data
+
+# For realtime prices
+def PopulateNewPricesDB(db_file, csv_data):
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    cur.execute("CREATE TABLE prices (time, name, price, bid, ask);")
+    print("DB Header created")
+    cur.executemany("INSERT INTO prices (time, name, price, bid, ask) VALUES(?, ?, ?, ?, ?);", csv_data)
+    print("DB populated")
+    con.commit()
+    con.close()
+
+def AppendPricesDB(db_file, csv_data):
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    cur.execute("INSERT INTO prices (time, name, price, bid, ask) VALUES(?, ?, ?, ?, ?, ?);", csv_data)
+    print("New line added to the database")
+    con.commit()
+    con.close()
+
+def ReadAllValuesFromPricesCSV(csv_file):
+    with open(csv_file, "r") as data_file:
+        data = csv.DictReader(data_file)
+        to_db = [(i['time'], i['name'], i['price'], i['bid'], i['ask']) for i in data]
+    return to_db
+
+def ReadMostRecentValueFromPricesCSV(csv_file):
+    csv_data = ReadAllValuesFromPricesCSV(csv_file)
+    relevant_data = csv_data[-1]
+    return relevant_data
+
+# For cash balances
+def PopulateNewCashDB(db_file, csv_data):
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    cur.execute("CREATE TABLE cash (time, name, cash);")
+    print("DB Header created")
+    cur.executemany("INSERT INTO cash (time, name, cash) VALUES(?, ?, ?);", csv_data)
+    print("DB populated")
+    con.commit()
+    con.close()
+
+def AppendCashDB(db_file, csv_data):
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    cur.execute("INSERT INTO cash (time, name, cash) VALUES(?, ?, ?);", csv_data)
+    print("New line added to the database")
+    con.commit()
+    con.close()
+
+def ReadAllValuesFromCashCSV(csv_file):
+    with open(csv_file, "r") as data_file:
+        data = csv.DictReader(data_file)
+        to_db = [(i['time'], i['name'], i['cash']) for i in data]
+    return to_db
+
+def ReadMostRecentValueFromCashCSV(csv_file):
+    csv_data = ReadAllValuesFromCashCSV(csv_file)
     relevant_data = csv_data[-1]
     return relevant_data
 
@@ -71,11 +132,11 @@ def CheckIfValueIsAlreadyWritten(csv_data, db_file):
         print("Adding new data")
         return False
 
-if __name__ == "__main__":
-    db_direc = direc + name
+# Execution functions
+def TransactionsExecution(db_direc, data_file):
     if(CheckIfFileExists(db_direc)):
         try:
-            csv_data = ReadMostRecentValueFromCSV(excel)
+            csv_data = ReadMostRecentValueFromTransactionsCSV(data_file)
         except FileNotFoundError:
             print("CSV file not found")
             sys.exit()
@@ -83,9 +144,58 @@ if __name__ == "__main__":
         if(check):
             sys.exit()
         else:
-            AppendDB(db_direc, csv_data)
+            AppendTransactionsDB(db_direc, csv_data)
     else:
         new_db = CreateNewDB(name)
         print(new_db)
-        csv_data = ReadAllValuesFromCSV(excel)
-        PopulateNewDB(new_db, csv_data)
+        csv_data = ReadAllValuesFromTransactionsCSV(data_file)
+        PopulateNewTransactionsDB(new_db, csv_data)
+
+def PricesExecution(db_direc, data_file):
+    if(CheckIfFileExists(db_direc)):
+        try:
+            csv_data = ReadMostRecentValueFromPricesCSV(data_file)
+        except FileNotFoundError:
+            print("CSV file not found")
+            sys.exit()
+        check = CheckIfValueIsAlreadyWritten(csv_data, db_direc)
+        if(check):
+            sys.exit()
+        else:
+            AppendPricesDB(db_direc, csv_data)
+    else:
+        new_db = CreateNewDB(name)
+        print(new_db)
+        csv_data = ReadAllValuesFromPricesCSV(data_file)
+        PopulateNewPricesDB(new_db, csv_data)
+
+def CashExecution(db_direc, data_file):
+    if(CheckIfFileExists(db_direc)):
+        try:
+            csv_data = ReadMostRecentValueFromCashCSV(data_file)
+        except FileNotFoundError:
+            print("CSV file not found")
+            sys.exit()
+        check = CheckIfValueIsAlreadyWritten(csv_data, db_direc)
+        if(check):
+            sys.exit()
+        else:
+            AppendCashDB(db_direc, csv_data)
+    else:
+        new_db = CreateNewDB(name)
+        print(new_db)
+        csv_data = ReadAllValuesFromCashCSV(data_file)
+        PopulateNewCashDB(new_db, csv_data)
+
+if __name__ == "__main__":
+    db_direc = direc + name
+    if("Transaction" in name):
+        TransactionsExecution(db_direc, excel)
+    elif("Balance" in name):
+        CashExecution(db_direc, excel)
+    elif("Realtime" in name):
+        PricesExecution(db_direc, excel)
+    else:
+        "Not a valid csv input"
+        sys.exit()
+    print("Complete!")

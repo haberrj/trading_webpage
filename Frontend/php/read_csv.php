@@ -24,12 +24,24 @@
         return $values[0];
     }
 
-    function getPrice($values){
-        return $values[1];
+    function getHoldingPrice($values){
+        $type = getLastType($values);
+        if($type == "SELL"){
+            $price = "N/A";
+        } else {
+            $price = $values[1];
+        }
+        return $price;
     }
 
     function getBalance($values){
-        return $values[2];
+        $type = getLastType($values);
+        if($type == "SELL"){
+            $balance = 0.0;
+        } else {
+            $balance = $values[2];
+        }
+        return $balance;
     }
 
     function getLastType($values){
@@ -38,7 +50,13 @@
 
     function calculateNetworth($values){
         $balance = (float)getBalance($values);
-        $price = (float)getPrice($values);
+        $price = getHoldingPrice($values);
+        if($price == "N/A")
+        {
+            $price = 0.0;
+        } else {
+            $price = (float)$price;
+        }
         $networth = $balance * $price;
         return $networth;
     }
@@ -46,12 +64,7 @@
     function closeConnection($connection){
         $connection->close();
     }
-    
-    function runDB($file){
-        $connection = connectToDB($file);
-        $values = getLastValues($connection);
-        echo getPrice($values);
-    }
+
     // connectToDB('/home/ronhaber/Documents/Webpage/ETH_DB.db');
     // runDB('/home/ronhaber/Documents/Webpage/ETH_DB.db');
     // runDB('/home/ronhaber/Documents/Webpage/ETH_DB.db');

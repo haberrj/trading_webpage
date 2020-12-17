@@ -28,7 +28,7 @@
                     <p class="cash">Allocated Cash Amount:  
                     <?php
                         include 'Frontend/php/read_csv.php';
-                        $file = "/home/ronhaber/Documents/Webpage/BTC_Balance.db";
+                        $file = "/database_files/BTC_Balance.db";
                         $connection = connectToDB($file);
                         $values = getLastCashValues($connection);
                         echo getCash($values);
@@ -38,7 +38,7 @@
                     </p>
                     <p class="balance">Current Balance:
                     <?php
-                        $file = "/home/ronhaber/Documents/Webpage/BTC_Transactions.db";
+                        $file = "/database_files/BTC_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         echo getBalance($values);

@@ -214,4 +214,3 @@ if __name__ == "__main__":
     else:
         "Not a valid csv input"
         sys.exit()
-    print("Complete!")

@@ -8,11 +8,12 @@ RUN apt-get install -y git python-dev nano
 RUN mkdir /database_files/
 RUN mkdir /scripts
 
-ADD Backend /
+ADD Backend /scripts/Backend
 
 RUN chmod +x /web_files/Backend/python/create_relevant_database.sh
 
-COPY /Frontend /var/www/html/
+COPY index.php /var/www/html/
+COPY Frontend /var/www/html/Frontend
 WORKDIR /scripts/
 
 ENTRYPOINT [ "create_relevant_database.sh" ]

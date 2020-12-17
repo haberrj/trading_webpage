@@ -17,7 +17,7 @@ parser.add_argument("-n", "--name", type=str, required=True, help="The name of t
 args = parser.parse_args()
 excel = str(args.excel)
 name = str(args.name) + ".db"
-direc = "/home/ronhaber/Documents/Webpage/"
+direc = "/database_files/"
 
 def CheckIfFileExists(filename):
     # Will also remove the file if it exists

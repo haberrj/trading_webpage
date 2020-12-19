@@ -1,3 +1,83 @@
+/*BTC*/
 .cash_btc, #btc_cash {
+    display: inline;
+}
+
+.balance_btc, #btc_balance {
+    display: inline;
+}
+
+.price_btc, #btc_price {
+    display: inline;
+}
+
+.last_holding_btc, #btc_holding {
+    display: inline;
+}
+
+.networth_btc, #btc_networth {
+    display: inline;
+}
+
+/*ETH*/
+.cash_eth, #eth_cash {
+    display: inline;
+}
+
+.balance_eth, #eth_balance {
+    display: inline;
+}
+
+.price_eth, #eth_price {
+    display: inline;
+}
+
+.last_holding_eth, #eth_holding {
+    display: inline;
+}
+
+.networth_eth, #eth_networth {
+    display: inline;
+}
+
+/*LTC*/
+.cash_ltc, #ltc_cash {
+    display: inline;
+}
+
+.balance_ltc, #ltc_balance {
+    display: inline;
+}
+
+.price_ltc, #ltc_price {
+    display: inline;
+}
+
+.last_holding_ltc, #ltc_holding {
+    display: inline;
+}
+
+.networth_ltc, #ltc_networth {
+    display: inline;
+}
+
+/*BNB*/
+.cash_bnb, #bnb_cash {
+    display: inline;
+}
+
+.balance_bnb, #bnb_balance {
+    display: inline;
+}
+
+.price_bnb, #bnb_price {
+    display: inline;
+}
+
+.last_holding_bnb, #bnb_holding {
+    display: inline;
+}
+
+.networth_bnb, #bnb_networth {
     display: inline;
 }

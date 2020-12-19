@@ -86,3 +86,7 @@ body {
     width: 85%;
     height: auto;
 }
+
+.cash_btc, #btc_cash {
+    display: inline;
+}

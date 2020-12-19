@@ -1,10 +1,10 @@
 <?php
     include "output_calls.php";
-    include "read_csv.php";
+    // include "read_csv.php";
 
-    if(!empty($_REQUEST['curr']) && !empty($_REQUEST['type'])){
-        $curr = $_REQUEST['curr'];
-        $type = $_REQUEST['type'];
+    if(!empty($_POST['curr']) && !empty($_POST['type'])){
+        $curr = $_POST['curr'];
+        $type = $_POST['type'];
         switch($curr){
             case 'BTC':
                 $file1 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Transactions.db";

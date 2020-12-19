@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading Bot</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript" src="Frontend/js/autoUpdate.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="Frontend/js/autoUpdate.js"></script> -->
     <link rel="stylesheet" href="Frontend/css/main.css">
 </head>
 <body>
@@ -26,11 +26,26 @@
                     <img src="Frontend/images/bitcoin.png" alt="Bitcoin logo">
                 </div>
                 <div class="btc_info">
-                    <p class="cash">Allocated Cash Amount:  
-                        <div class="btc_cash">
-                            €
+                    <p class="cash_btc">Allocated Cash Amount:
+                        <div id="btc_cash">
+                            <script type="text/javascript">
+                                function btcCashQuery() {
+                                    $.ajax({
+                                        url: 'Frontend/php/interaction_with_jq.php',
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        data: ({curr: 'BTC', type: 'cash'}),
+                                        success: function(data){
+                                            $('#btc_cash').html(data);
+                                        }
+                                    });
+                                }
+                                btcCashQuery();
+                                setTimeout(btcCashQuery, 5000);
+                            </script>
                         </div>
-                    </p>
+                        €
+                    <p>
                     <p class="balance">Current Balance:
                         <div class="btc_balance">
                             BTC

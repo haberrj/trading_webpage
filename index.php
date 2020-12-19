@@ -7,8 +7,24 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="Frontend/js/autoUpdate.js"></script> -->
     <link rel="stylesheet" href="Frontend/css/main.css">
+    <link rel="stylesheet" href="Frontend/css/update_values.css">
 </head>
 <body>
+    <script type="text/javascript">
+        function btcCashQuery() {
+            $.ajax({
+                url: 'Frontend/php/interaction_with_jq.php',
+                type: 'POST',
+                dataType: 'json',
+                data: ({curr: 'BTC', type: 'cash'}),
+                success: function(data){
+                    $('#btc_cash').html(data);
+                }
+            });
+        }
+        btcCashQuery();
+        setTimeout(btcCashQuery, 5000);
+    </script>
     <div class="hero-bg">
         <section class="top-info">
             <header>
@@ -28,21 +44,6 @@
                 <div class="btc_info">
                     <p class="cash_btc">Allocated Cash Amount:
                         <div id="btc_cash">
-                            <script type="text/javascript">
-                                function btcCashQuery() {
-                                    $.ajax({
-                                        url: 'Frontend/php/interaction_with_jq.php',
-                                        type: 'POST',
-                                        dataType: 'json',
-                                        data: ({curr: 'BTC', type: 'cash'}),
-                                        success: function(data){
-                                            $('#btc_cash').html(data);
-                                        }
-                                    });
-                                }
-                                btcCashQuery();
-                                setTimeout(btcCashQuery, 5000);
-                            </script>
                         </div>
                         €
                     <p>
@@ -53,8 +54,8 @@
                     </p>
                     <p class="price">Current Price: 
                         <div class="btc_price">
-                            €
                         </div>
+                        €
                     </p>
                     <p class="last_holding">Current Holding Price:
                         <div class="btc_holding">

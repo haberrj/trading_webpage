@@ -28,7 +28,7 @@
                     <p class="cash">Allocated Cash Amount:  
                     <?php
                         include 'Frontend/php/read_csv.php';
-                        $file = "/database_files/BTC_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Balance.db";
                         $connection = connectToDB($file);
                         $values = getLastCashValues($connection);
                         echo getCash($values);
@@ -38,7 +38,7 @@
                     </p>
                     <p class="balance">Current Balance:
                     <?php
-                        $file = "/database_files/BTC_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         echo getBalance($values);
@@ -48,7 +48,7 @@
                     </p>
                     <p class="price">Current Price: 
                     <?php    
-                        $file = "/database_files/BTC_Realtime.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Realtime.db";
                         $connection = connectToDB($file);
                         $values = getLastPriceValues($connection);
                         echo getPrice($values);
@@ -58,7 +58,7 @@
                     </p>
                     <p class="last_holding">Current Holding Price:
                     <?php
-                        $file = "/database_files/BTC_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         $last_holding_price = getHoldingPrice($values);
@@ -71,9 +71,9 @@
                     </p>
                     <p class="networth">Current Networth:
                     <?php
-                        $file = "/database_files/BTC_Transactions.db";
-                        $file2 = "/database_files/BTC_Realtime.db";
-                        $file3 = "/database_files/BTC_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BTC_Balance.db";
                         $connection = connectToDB($file);
                         $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
@@ -88,6 +88,8 @@
                         €
                     </p>
                 </div>
+                <img id="btc_realtime" src="Frontend/images/Graphics/BTC_Realtime.png" alt="Bitcoin price graph">
+                <img id="btc_balance" src="Frontend/images/Graphics/BTC_Balance.png" alt="Bitcoin balance graph">
             </section>
             <section class="eth">
                 <div class="eth_title">
@@ -97,7 +99,7 @@
                 <div class="eth_info">
                     <p class="cash">Allocated Cash Amount:  
                     <?php    
-                        $file = "/database_files/ETH_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Balance.db";
                         $connection = connectToDB($file);
                         $values = getLastCashValues($connection);
                         echo getCash($values);
@@ -106,7 +108,7 @@
                         €</p>
                     <p class="balance">Current Balance:  
                     <?php
-                        $file = "/database_files/ETH_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         echo getBalance($values);
@@ -116,7 +118,7 @@
                     </p>
                     <p class="price">Current Price:  
                     <?php    
-                        $file = "/database_files/ETH_Realtime.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Realtime.db";
                         $connection = connectToDB($file);
                         $values = getLastPriceValues($connection);
                         echo getPrice($values);
@@ -126,7 +128,7 @@
                     </p>
                     <p class="last_holding">Current Holding Price:  
                     <?php
-                        $file = "/database_files/ETH_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         $last_holding_price = getHoldingPrice($values);
@@ -139,9 +141,9 @@
                     </p>
                     <p class="networth">Current Networth:  
                     <?php
-                        $file = "/database_files/ETH_Transactions.db";
-                        $file2 = "/database_files/ETH_Realtime.db";
-                        $file3 = "/database_files/ETH_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/ETH_Balance.db";
                         $connection = connectToDB($file);
                         $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
@@ -156,6 +158,8 @@
                         €
                     </p>
                 </div>
+                <img id="eth_realtime" src="Frontend/images/Graphics/ETH_Realtime.png" alt="Bitcoin price graph">
+                <img id="eth_balance" src="Frontend/images/Graphics/ETH_Balance.png" alt="Bitcoin balance graph">
             </section>
             <section class="ltc">
                 <div class="ltc_title">
@@ -165,7 +169,7 @@
                 <div class="ltc_info">
                     <p class="cash">Allocated Cash Amount:  
                     <?php    
-                        $file = "/database_files/LTC_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Balance.db";
                         $connection = connectToDB($file);
                         $values = getLastCashValues($connection);
                         echo getCash($values);
@@ -175,7 +179,7 @@
                     </p>
                     <p class="balance">Current Balance:  
                     <?php
-                        $file = "/database_files/LTC_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         echo getBalance($values);
@@ -185,7 +189,7 @@
                     </p>
                     <p class="price">Current Price:  
                     <?php    
-                        $file = "/database_files/LTC_Realtime.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Realtime.db";
                         $connection = connectToDB($file);
                         $values = getLastPriceValues($connection);
                         echo getPrice($values);
@@ -195,7 +199,7 @@
                     </p>
                     <p class="last_holding">Current Holding Price:  
                     <?php
-                        $file = "/database_files/LTC_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         $last_holding_price = getHoldingPrice($values);
@@ -208,9 +212,9 @@
                     </p>
                     <p class="networth">Current Networth:  
                     <?php
-                        $file = "/database_files/LTC_Transactions.db";
-                        $file2 = "/database_files/LTC_Realtime.db";
-                        $file3 = "/database_files/LTC_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/LTC_Balance.db";
                         $connection = connectToDB($file);
                         $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
@@ -225,6 +229,8 @@
                         €
                     </p>
                 </div>
+                <img id="ltc_realtime" src="Frontend/images/Graphics/LTC_Realtime.png" alt="Bitcoin price graph">
+                <img id="ltc_balance" src="Frontend/images/Graphics/LTC_Balance.png" alt="Bitcoin balance graph">
             </section>
             <section class="bnb">
                 <div class="bnb_title">
@@ -234,7 +240,7 @@
                 <div class="bnb_info">
                     <p class="cash">Allocated Cash Amount:  
                     <?php    
-                        $file = "/database_files/BNB_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Balance.db";
                         $connection = connectToDB($file);
                         $values = getLastCashValues($connection);
                         echo getCash($values);
@@ -244,7 +250,7 @@
                     </p>
                     <p class="balance">Current Balance:  
                     <?php
-                        $file = "/database_files/BNB_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         echo getBalance($values);
@@ -254,7 +260,7 @@
                     </p>
                     <p class="price">Current Price:  
                     <?php    
-                        $file = "/database_files/BNB_Realtime.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Realtime.db";
                         $connection = connectToDB($file);
                         $values = getLastPriceValues($connection);
                         echo getPrice($values);
@@ -264,7 +270,7 @@
                     </p>
                     <p class="last_holding">Current Holding Price:  
                     <?php
-                        $file = "/database_files/BNB_Transactions.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Transactions.db";
                         $connection = connectToDB($file);
                         $values = getLastTransactionValues($connection);
                         $last_holding_price = getHoldingPrice($values);
@@ -277,9 +283,9 @@
                     </p>
                     <p class="networth">Current Networth:  
                     <?php
-                        $file = "/database_files/BNB_Transactions.db";
-                        $file2 = "/database_files/BNB_Realtime.db";
-                        $file3 = "/database_files/BNB_Balance.db";
+                        $file = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Transactions.db";
+                        $file2 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Realtime.db";
+                        $file3 = "/home/ronhaber/Documents/Crypto_Docs/Binance/Databases/BNB_Balance.db";
                         $connection = connectToDB($file);
                         $trans_values = getLastTransactionValues($connection);
                         closeConnection($connection);
@@ -294,6 +300,8 @@
                         €
                     </p>
                 </div>
+                <img id="bnb_realtime" src="Frontend/images/Graphics/BNB_Realtime.png" alt="Bitcoin price graph">
+                <img id="bnb_balance" src="Frontend/images/Graphics/BNB_Balance.png" alt="Bitcoin balance graph">
             </section>
         </section>
     </div>

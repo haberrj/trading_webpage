@@ -1,0 +1,91 @@
+.btc {
+    height: 450px;
+    width: 1100px;
+}
+.btc_info {
+    float: left;
+    padding-right: 30px;
+}
+
+#btc_realtime {
+    float: left;
+    width: 33.33%;
+    height: auto;
+    padding: 15px;
+}
+
+#btc_balance {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+    height: auto;
+}
+
+.eth {
+    height: 450px;
+    width: 1100px;
+}
+.eth_info {
+    float: left;
+    padding-right: 30px;
+}
+
+#eth_realtime {
+    float: left;
+    width: 33.33%;
+    height: auto;
+    padding: 15px;
+}
+
+#eth_balance {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+    height: auto;
+}
+
+.ltc {
+    height: 450px;
+    width: 1100px;
+}
+.ltc_info {
+    float: left;
+    padding-right: 30px;
+}
+
+#ltc_realtime {
+    float: left;
+    width: 33.33%;
+    height: auto;
+    padding: 15px;
+}
+
+#ltc_balance {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+    height: auto;
+}
+
+.bnb {
+    height: 450px;
+    width: 1100px;
+}
+.bnb_info {
+    float: left;
+    padding-right: 30px;
+}
+
+#bnb_realtime {
+    float: left;
+    width: 33.33%;
+    height: auto;
+    padding: 15px;
+}
+
+#bnb_balance {
+    float: left;
+    width: 33.33%;
+    padding: 15px;
+    height: auto;
+}

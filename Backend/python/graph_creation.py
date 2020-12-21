@@ -56,15 +56,17 @@ def GetXandYValues(csv_data, name):
         # x_vector = int(datetime.datetime.timestamp(holder))
     return x_vector, y_vector
 
-def plot(x_vector, y_vector, name, direc):
+def plot(x_vector, y_vector, name, direc, excel):
     plt.plot(x_vector, y_vector)
     plt.xlabel('time')
     plt.ylabel(name)
-    save_name = direc
+    plt.xticks([])
+    pic_name = (excel.split('/')[-1]).split('.')[0]
+    save_name = direc + pic_name + '.png'
     plt.savefig(save_name)
 
 
 if __name__ == "__main__":
     csv_data = ReadCSV(excel)
     x_vector, y_vector = GetXandYValues(csv_data, variable)
-    plot(x_vector, y_vector, variable, target_direc)
+    plot(x_vector, y_vector, variable, target_direc, excel)

@@ -2,10 +2,7 @@ FROM php:7.2-apache
 
 LABEL maintainer="Ron Haber"
 
-RUN apt-get update
-RUN apt-get install -y nano
-
-RUN mkdir /database_files/
+RUN apt-get update && apt-get install -y nano && mkdir /database_files/
 # RUN mkdir /database_files/Binance
 # RUN mkdir /scripts
 
